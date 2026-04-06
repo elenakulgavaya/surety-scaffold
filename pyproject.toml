@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "surety-scaffold"
+description = "Code generation for surety contracts"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+authors = [
+    { name = "Elena Kulgavaya", email = "elena.kulgavaya@gmail.com" }
+]
+dynamic = ["version"]
+dependencies = [
+      "surety>=0.0.4,<1.0",
+      "pyyaml>=6.0",
+      "jsonschema>=4.0",
+]
+keywords = [
+    "api",
+    "contract-testing",
+    "automation",
+    "codegen",
+    "surety"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+surety-scaffold = "surety.scaffold.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["surety*"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "no-local-version"
