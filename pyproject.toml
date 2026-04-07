@@ -14,8 +14,6 @@ authors = [
 dynamic = ["version"]
 dependencies = [
       "surety>=0.0.4,<1.0",
-      "pyyaml>=6.0",
-      "jsonschema>=4.0",
 ]
 keywords = [
     "api",
