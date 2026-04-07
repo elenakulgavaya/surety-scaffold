@@ -1,7 +1,7 @@
 import pytest
 
 from surety.scaffold.extract.type_extractor import (
-    is_datetime, is_uuid, get_primitive_type, to_pascal_case,
+    is_datetime, is_uuid, get_primitive_type, singularize, to_pascal_case,
 )
 
 def test_is_datetime_none():
@@ -89,3 +89,19 @@ def test_get_primitive_type_string(value):
 ])
 def test_to_pascal_case(value):
     assert to_pascal_case(value) == 'TestString'
+
+
+@pytest.mark.parametrize('name, expected', [
+    ('Items', 'Item'),
+    ('ExtraItems', 'ExtraItem'),
+    ('Tags', 'Tag'),
+    ('Categories', 'Category'),
+    ('Addresses', 'Address'),
+    ('Statuses', 'Status'),
+    ('Boxes', 'Box'),
+    ('History', 'History'),
+    ('Address', 'Address'),
+    ('Status', 'Statu'),
+])
+def test_singularize(name, expected):
+    assert singularize(name) == expected

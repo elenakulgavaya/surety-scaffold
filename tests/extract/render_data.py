@@ -18,17 +18,17 @@ STRING_FIELD_SPEC = FieldSpec(
     attr_name='StringName',
     json_key='string_name',
     surety_type='String',
-    extra_kwargs={'required': True}
+    extra_kwargs={}
 )
-STRING_FIELD_SPEC_LINE = "StringName = String(name='string_name', required=True)"
+STRING_FIELD_SPEC_LINE = "StringName = String(name='string_name')"
 
 FlOAT_FIELD_SPEC = FieldSpec(
     attr_name='FloatName',
     json_key='float_name',
     surety_type='Float',
-    extra_kwargs={'required': True}
+    extra_kwargs={}
 )
-FLOAT_FIELD_SPEC_LINE = "FloatName = Float(name='float_name', required=True)"
+FLOAT_FIELD_SPEC_LINE = "FloatName = Float(name='float_name')"
 
 
 STRING_FIELD_SPEC_WITH_ARGS = FieldSpec(
@@ -42,7 +42,7 @@ STRING_FIELD_SPEC_WITH_ARGS_LINE = (
 )
 
 
-CUSTOM_FIELD_SPEC =  FieldSpec(
+CUSTOM_FIELD_SPEC = FieldSpec(
     attr_name='CustomName',
     json_key='custom_name',
     surety_type='MyObject',
@@ -54,9 +54,9 @@ ARRAY_FIELD_SPEC = FieldSpec(
     json_key='array_name',
     surety_type='Array',
     array_item_type='Int',
-    extra_kwargs={'required': True}
+    extra_kwargs={}
 )
-ARRAY_FIELD_SPEC_LINE = "ArrayName = Array(Int, name='array_name', required=True)"
+ARRAY_FIELD_SPEC_LINE = "ArrayName = Array(Int, name='array_name')"
 
 
 PRIMITIVES_SPEC = ClassSpec(
@@ -74,28 +74,27 @@ PRIMITIVES_SPEC_IMPORTS = {'Dictionary'} | PRIMITIVE_TYPES
 
 SPEC_WITH_NONE_DICT = {'none_name': None}
 SPEC_WITH_NONE = ClassSpec(
-        class_name='Root',
-        fields=[FieldSpec(
-            attr_name='NoneName',
-            json_key='none_name',
-            surety_type='String',
-            extra_kwargs={'allow_none': True, 'required': True}
-        )],
-        dependencies=[]
-    )
+    class_name='Root',
+    fields=[FieldSpec(
+        attr_name='NoneName',
+        json_key='none_name',
+        surety_type='String',
+        extra_kwargs={'allow_none': True}
+    )],
+    dependencies=[]
+)
 
 SPEC_WITH_TWO_TYPES_DICT = {'string_name': 'test', 'float_name': 1.23}
 SPEC_WITH_TWO_TYPES = ClassSpec(
-        class_name='Root',
-        fields=[STRING_FIELD_SPEC, FlOAT_FIELD_SPEC],
-        dependencies=[]
-    )
+    class_name='Root',
+    fields=[STRING_FIELD_SPEC, FlOAT_FIELD_SPEC],
+    dependencies=[]
+)
 SPEC_WITH_TWO_TYPES_IMPORTS = {'Dictionary', 'Float', 'String'}
 SPEC_WITH_TWO_TYPES_CLASSES = [
     f"class Root(Dictionary):\n"
     f"    {STRING_FIELD_SPEC_LINE}\n"
     f"    {FLOAT_FIELD_SPEC_LINE}"
-
 ]
 SPEC_WITH_TWO_TYPES_FULL = (
     'from surety import Dictionary, Float, String\n\n\n'
@@ -122,7 +121,7 @@ SPEC_WITH_NESTED = ClassSpec(
             attr_name='NestedName',
             json_key='nested_name',
             surety_type='NestedName',
-            extra_kwargs={'required': True}
+            extra_kwargs={}
         )
     ],
     dependencies=[
@@ -137,7 +136,7 @@ SPEC_WITH_NESTED_CLASSES = [
     "class NestedName(Dictionary):\n"
     f"    {STRING_FIELD_SPEC_LINE}",
     "class Root(Dictionary):\n"
-    "    NestedName = NestedName(name='nested_name', required=True)"
+    "    NestedName = NestedName(name='nested_name')"
 ]
 SPEC_WITH_NESTED_FULL = (
     'from surety import Dictionary, String\n\n\n'
@@ -188,7 +187,7 @@ SPEC_WITH_ARRAY_OF_NESTED = ClassSpec(
             json_key='array_name',
             surety_type='Array',
             array_item_type='ArrayName',
-            extra_kwargs={'required': True},
+            extra_kwargs={},
         )
     ],
     dependencies=[
@@ -199,10 +198,10 @@ SPEC_WITH_ARRAY_OF_NESTED = ClassSpec(
                     attr_name='BoolName',
                     json_key='bool_name',
                     surety_type='Bool',
-                    extra_kwargs={'required': True},
+                    extra_kwargs={},
                 ),
             ]
         )
     ]
 )
-SPEC_WITH_ARAY_OF_NESTED_IMPORTS = {'Array', 'Bool', 'Dictionary'}
+SPEC_WITH_ARRAY_OF_NESTED_IMPORTS = {'Array', 'Bool', 'Dictionary'}

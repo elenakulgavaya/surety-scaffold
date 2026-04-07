@@ -1,7 +1,7 @@
 import json
 
 from .base import ClassSpec, FieldSpec
-from .type_extractor import get_primitive_type, to_pascal_case
+from .type_extractor import get_primitive_type, singularize, to_pascal_case
 from .renderer import render
 
 
@@ -25,7 +25,7 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                 attr_name=attr_name,
                 json_key=key,
                 surety_type='String',
-                extra_kwargs={'allow_none': True, 'required': True},
+                extra_kwargs={'allow_none': True},
             ))
 
         elif isinstance(value, bool):
@@ -33,7 +33,7 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                 attr_name=attr_name,
                 json_key=key,
                 surety_type='Bool',
-                extra_kwargs={'required': True},
+                extra_kwargs={},
             ))
 
         elif isinstance(value, dict):
@@ -43,7 +43,7 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                 attr_name=attr_name,
                 json_key=key,
                 surety_type=nested.class_name,
-                extra_kwargs={'required': True},
+                extra_kwargs={},
             ))
 
         elif isinstance(value, list):
@@ -55,7 +55,7 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                     attr_name=attr_name,
                     json_key=key,
                     surety_type='Array',
-                    extra_kwargs={'required': True},
+                    extra_kwargs={},
                     array_item_type=item_type,
                 ))
             else:
@@ -66,13 +66,14 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                     if isinstance(item, dict):
                         merged.update(item)
 
-                nested = _build_class_spec(merged, to_pascal_case(key), seen_names)
+                item_class_name = singularize(to_pascal_case(key))
+                nested = _build_class_spec(merged, item_class_name, seen_names)
                 dependencies.append(nested)
                 fields.append(FieldSpec(
                     attr_name=attr_name,
                     json_key=key,
                     surety_type='Array',
-                    extra_kwargs={'required': True},
+                    extra_kwargs={},
                     array_item_type=nested.class_name,
                 ))
 
@@ -81,7 +82,7 @@ def _build_class_spec(data: dict, class_name: str, seen_names: dict) -> ClassSpe
                 attr_name=attr_name,
                 json_key=key,
                 surety_type=get_primitive_type(value),
-                extra_kwargs={'required': True},
+                extra_kwargs={},
             ))
 
     return ClassSpec(

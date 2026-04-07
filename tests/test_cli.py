@@ -9,7 +9,7 @@ SIMPLE_JSON = json.dumps({'name': 'Alice'})
 SIMPLE_OUTPUT = (
     "from surety import Dictionary, String\n\n\n"
     "class Schema(Dictionary):\n"
-    "    Name = String(name='name', required=True)"
+    "    Name = String(name='name')"
 )
 
 

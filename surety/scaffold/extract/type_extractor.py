@@ -41,6 +41,17 @@ def is_datetime(value: str) -> bool:
     return False
 
 
+def singularize(name: str) -> str:
+    """Remove trailing plural suffix from a PascalCase class name."""
+    if name.endswith('ies'):
+        return name[:-3] + 'y'
+    if len(name) > 3 and name.endswith('ses') or name.endswith('xes'):
+        return name[:-2]
+    if name.endswith('s') and not name.endswith('ss'):
+        return name[:-1]
+    return name
+
+
 def get_primitive_type(value) -> str:
     """Return the surety type name for a primitive Python value."""
     result = 'String'
