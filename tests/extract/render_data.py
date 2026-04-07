@@ -172,11 +172,11 @@ SPEC_WITH_DUPLICATED_NESTED = ClassSpec(
     ]
 )
 SPEC_WITH_DUPLICATED_NESTED_CLASSES = [
-    f"class Nested(Dictionary):\n"
+    "class Nested(Dictionary):\n"
     f"    {STRING_FIELD_SPEC_LINE}",
-    f"class Root(Dictionary):\n"
-    f"    FirstNestedName = Nested(name='first_nested_name')\n"
-    f"    SecondNestedName = Nested(name='second_nested_name')"
+    "class Root(Dictionary):\n"
+    "    FirstNestedName = Nested(name='first_nested_name')\n"
+    "    SecondNestedName = Nested(name='second_nested_name')"
 ]
 
 SPEC_WITH_ARRAY_OF_NESTED_DICT = {'array_name': [{'bool_name': True}]}
@@ -184,8 +184,8 @@ SPEC_WITH_ARRAY_OF_NESTED = ClassSpec(
     class_name='Root',
     fields=[
         FieldSpec(
-            attr_name=f'ArrayName',
-            json_key=f'array_name',
+            attr_name='ArrayName',
+            json_key='array_name',
             surety_type='Array',
             array_item_type='ArrayName',
             extra_kwargs={'required': True},
@@ -196,8 +196,8 @@ SPEC_WITH_ARRAY_OF_NESTED = ClassSpec(
             class_name='ArrayName',
             fields=[
                 FieldSpec(
-                    attr_name=f'BoolName',
-                    json_key=f'bool_name',
+                    attr_name='BoolName',
+                    json_key='bool_name',
                     surety_type='Bool',
                     extra_kwargs={'required': True},
                 ),
