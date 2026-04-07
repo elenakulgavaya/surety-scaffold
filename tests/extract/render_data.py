@@ -1,4 +1,4 @@
-from surety.scaffold.extract.base import ClassSpec, FieldSpec, PRIMITIVE_TYPES
+from surety.scaffold.extract.base import PRIMITIVE_TYPES, ClassSpec, FieldSpec
 
 
 EMPTY_DICT = {}
@@ -119,8 +119,8 @@ SPEC_WITH_NESTED = ClassSpec(
     class_name='Root',
     fields=[
         FieldSpec(
-            attr_name=f'NestedName',
-            json_key=f'nested_name',
+            attr_name='NestedName',
+            json_key='nested_name',
             surety_type='NestedName',
             extra_kwargs={'required': True}
         )
@@ -134,10 +134,10 @@ SPEC_WITH_NESTED = ClassSpec(
 )
 SPEC_WITH_NESTED_IMPORTS = {'Dictionary', 'String'}
 SPEC_WITH_NESTED_CLASSES = [
-    f"class NestedName(Dictionary):\n"
+    "class NestedName(Dictionary):\n"
     f"    {STRING_FIELD_SPEC_LINE}",
-    f"class Root(Dictionary):\n"
-    f"    NestedName = NestedName(name='nested_name', required=True)"
+    "class Root(Dictionary):\n"
+    "    NestedName = NestedName(name='nested_name', required=True)"
 ]
 SPEC_WITH_NESTED_FULL = (
     'from surety import Dictionary, String\n\n\n'
@@ -150,13 +150,13 @@ SPEC_WITH_DUPLICATED_NESTED = ClassSpec(
     class_name='Root',
     fields=[
         FieldSpec(
-            attr_name=f'FirstNestedName',
-            json_key=f'first_nested_name',
+            attr_name='FirstNestedName',
+            json_key='first_nested_name',
             surety_type='Nested',
         ),
         FieldSpec(
-            attr_name=f'SecondNestedName',
-            json_key=f'second_nested_name',
+            attr_name='SecondNestedName',
+            json_key='second_nested_name',
             surety_type='Nested',
         )
     ],
@@ -180,7 +180,7 @@ SPEC_WITH_DUPLICATED_NESTED_CLASSES = [
 ]
 
 SPEC_WITH_ARRAY_OF_NESTED_DICT = {'array_name': [{'bool_name': True}]}
-SPEC_WITH_ARAY_OF_NESTED = ClassSpec(
+SPEC_WITH_ARRAY_OF_NESTED = ClassSpec(
     class_name='Root',
     fields=[
         FieldSpec(

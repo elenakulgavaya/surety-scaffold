@@ -2,8 +2,6 @@ import json
 from io import StringIO
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from surety.scaffold.cli import _copy_to_clipboard, main
 
 
@@ -22,8 +20,7 @@ def test_returns_true_when_pbcopy_succeeds():
 
 
 def test_tries_xclip_when_pbcopy_missing():
-    import subprocess
-    def side_effect(cmd, **kwargs):
+    def side_effect(cmd, **_):
         if cmd[0] == 'pbcopy':
             raise FileNotFoundError
         return MagicMock(returncode=0)
@@ -34,7 +31,7 @@ def test_tries_xclip_when_pbcopy_missing():
 
 
 def test_tries_xdotool_when_pbcopy_and_xclip_missing():
-    def side_effect(cmd, **kwargs):
+    def side_effect(cmd, **_):
         if cmd[0] in ('pbcopy', 'xclip'):
             raise FileNotFoundError
         return MagicMock(returncode=0)
@@ -116,7 +113,7 @@ def test_invalid_json_exits_with_error():
 
 def test_copies_to_clipboard_by_default():
     with patch('surety.scaffold.cli._copy_to_clipboard', return_value=True) as mock_copy:
-        stdout, stderr, _ = _run([SIMPLE_JSON])
+        _, stderr, _ = _run([SIMPLE_JSON])
 
     mock_copy.assert_called_once_with(SIMPLE_OUTPUT)
     assert 'Copied to clipboard' in stderr

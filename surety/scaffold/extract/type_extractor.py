@@ -43,17 +43,20 @@ def is_datetime(value: str) -> bool:
 
 def get_primitive_type(value) -> str:
     """Return the surety type name for a primitive Python value."""
-    if isinstance(value, bool):
-        return 'Bool'
-    if isinstance(value, int):
-        return 'Int'
-    if isinstance(value, float):
-        return 'Float'
-    if isinstance(value, str):
-        if is_uuid(value):
-            return 'Uuid'
-        if is_datetime(value):
-            return 'DateTime'
-        return 'String'
+    result = 'String'
 
-    return 'String'
+    if isinstance(value, bool):
+        result = 'Bool'
+    elif isinstance(value, int):
+        result = 'Int'
+    elif isinstance(value, float):
+        result = 'Float'
+    elif isinstance(value, str):
+        if is_uuid(value):
+            result = 'Uuid'
+        elif is_datetime(value):
+            result = 'DateTime'
+        else:
+            result = 'String'
+
+    return result

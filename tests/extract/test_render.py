@@ -1,7 +1,19 @@
 from surety.scaffold.extract.renderer import (
     _collect_imports, _render_classes, _render_kwargs_str, _render_line, render
 )
-from .render_data import *
+from .render_data import (
+    ARRAY_FIELD_SPEC, ARRAY_FIELD_SPEC_LINE,
+    CUSTOM_FIELD_SPEC, CUSTOM_FIELD_SPEC_LINE,
+    EMPTY_SPEC, EMPTY_SPEC_CLASSES, EMPTY_SPEC_FULL, EMPTY_SPEC_IMPORTS,
+    PRIMITIVES_SPEC, PRIMITIVES_SPEC_IMPORTS,
+    SPEC_WITH_ARRAY, SPEC_WITH_ARRAY_IMPORTS,
+    SPEC_WITH_ARRAY_OF_NESTED, SPEC_WITH_ARAY_OF_NESTED_IMPORTS,
+    SPEC_WITH_DUPLICATED_NESTED, SPEC_WITH_DUPLICATED_NESTED_CLASSES,
+    SPEC_WITH_NESTED, SPEC_WITH_NESTED_CLASSES, SPEC_WITH_NESTED_FULL,
+    SPEC_WITH_NESTED_IMPORTS, SPEC_WITH_TWO_TYPES, SPEC_WITH_TWO_TYPES_CLASSES,
+    SPEC_WITH_TWO_TYPES_FULL, STRING_FIELD_SPEC, STRING_FIELD_SPEC_LINE,
+    STRING_FIELD_SPEC_WITH_ARGS_LINE, STRING_FIELD_SPEC_WITH_ARGS
+)
 
 def test_collect_imports_empty():
     imports = _collect_imports(EMPTY_SPEC, set())
@@ -24,7 +36,7 @@ def test_collect_imports_with_nested_class():
 
 
 def test_collect_imports_with_array_of_nested():
-    imports = _collect_imports(SPEC_WITH_ARAY_OF_NESTED, set())
+    imports = _collect_imports(SPEC_WITH_ARRAY_OF_NESTED, set())
     assert imports == SPEC_WITH_ARAY_OF_NESTED_IMPORTS
 
 
