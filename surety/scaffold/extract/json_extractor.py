@@ -107,4 +107,3 @@ def extract_from_json(json_data: str, class_name: str = 'Schema') -> str:
 
     root = _build_class_spec(data, class_name, seen_names={})
     return render(root)
-

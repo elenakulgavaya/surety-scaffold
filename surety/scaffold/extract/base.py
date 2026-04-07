@@ -21,4 +21,3 @@ class ClassSpec:
     class_name: str
     fields: List[FieldSpec] = field(default_factory=list)
     dependencies: List['ClassSpec'] = field(default_factory=list)
-
